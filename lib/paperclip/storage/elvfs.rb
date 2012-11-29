@@ -29,7 +29,7 @@ module Paperclip
 
       def flush_deletes #:nodoc:
         # TODO: Please! Implement this method.
-        @queued_for_write = {}
+        @queued_for_delete = []
       end
 
       private
