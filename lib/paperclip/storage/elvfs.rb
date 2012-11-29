@@ -18,7 +18,7 @@ module Paperclip
         @queued_for_write.each do |style_name, file|
           curl = Curl::Easy.new(storage_url("#{File.dirname(path(:style_name))}?cmd=upload&target=#{directory_target(path(:style_name))}")) do |curl|
             curl.multipart_form_post = true
-            curl.on_success{|response| JSON.parse(response.body_str)['added'].first['url'] }
+            curl.on_success{|response| instance.update_attribute :file_url, JSON.parse(response.body_str)['added'].first['url'] }
           end
           curl.http_post(Curl::PostField.file('upload[]', file.path, File.basename(path(:style_name))))
         end
