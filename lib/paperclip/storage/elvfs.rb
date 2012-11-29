@@ -31,7 +31,7 @@ module Paperclip
       def flush_deletes #:nodoc:
         @queued_for_delete.each do |path|
           log("deleting #{path}")
-          delete_file(path)
+          delete_entry(File.dirname(path))
         end
         @queued_for_delete = []
       end
@@ -50,9 +50,9 @@ module Paperclip
           directory_json(path)['cwd']['hash']
         end
 
-        def delete_file(path)
-          if file_hash = file_json(File.dirname(path))
-            open(storage_url("#{File.dirname(File.dirname(path))}?cmd=rm&targets[]=#{file_hash['hash']}"))
+        def delete_entry(path)
+          if file_hash = file_json(path)
+            open(storage_url("#{File.dirname(path)}?cmd=rm&targets[]=#{file_hash['hash']}"))
           end
         end
 
