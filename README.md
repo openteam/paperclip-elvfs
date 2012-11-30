@@ -1,6 +1,6 @@
 # Paperclip::Elvfs
 
-TODO: Write a gem description
+This gem extends [Paperclip](https://github.com/thoughtbot/paperclip) with [elFinder](https://github.com/Studio-42/elFinder) storage.
 
 ## Installation
 
@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Example:
+
+```ruby
+class User < ActiveRecord::Base
+  has_attached_file :avatar, :storage => :elvfs, :elvfs_url => "http://elfinder.org"
+end
+```
 
 ## Contributing
 
