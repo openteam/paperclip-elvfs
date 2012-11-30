@@ -17,6 +17,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
   gem.license       = "MIT"
+
   gem.add_dependency 'curb'
   gem.add_dependency 'paperclip'
+
+  gem.add_development_dependency 'rake'
 end
