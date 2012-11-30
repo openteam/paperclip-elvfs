@@ -53,15 +53,15 @@ module Paperclip
         end
 
         def upload_file(path, file)
-          curl = Curl::Easy.new(storage_url("#{File.dirname(path(:style_name))}?cmd=upload&target=#{directory_target(path)}")) do |curl|
+          curl = Curl::Easy.new(storage_url("#{File.dirname(path)}?cmd=upload&target=#{directory_target(path)}")) do |curl|
             curl.multipart_form_post = true
-            curl.on_success{|response| instance.update_column :file_url, JSON.parse(response.body_str)['added'].first['url'] }
+            curl.on_success{|response| instance.update_column "#{name}_url", JSON.parse(response.body_str)['added'].first['url'] }
           end
           curl.http_post(Curl::PostField.file('upload[]', file.path, File.basename(path)))
         end
 
         def storage_url(path='')
-          "http://localhost:3005/api/el_finder/v2/#{path}"
+          "#{options[:elvfs_url]}/api/el_finder/v2/#{path}"
         end
     end
   end
