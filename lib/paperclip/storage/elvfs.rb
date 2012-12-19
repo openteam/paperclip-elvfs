@@ -29,8 +29,8 @@ module Paperclip
         @queued_for_delete.each do |path|
           log("deleting #{path}")
           delete_entry(File.dirname(path))
+          instance.update_column "#{name}_url", nil
         end
-        instance.update_column "#{name}_url", nil
         @queued_for_delete = []
       end
 
