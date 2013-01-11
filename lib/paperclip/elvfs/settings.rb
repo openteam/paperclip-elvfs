@@ -6,10 +6,8 @@ Paperclip::Attachment.default_options[:path]       = ':app_name/:class/:attachme
 Paperclip::Attachment.default_options[:url]        = :file_url
 Paperclip::Attachment.default_options[:escape_url] = false
 
-# TODO: remove this warn when paperclip 3.3.2 will be released
 class Paperclip::Attachment
   def url_with_unescape(style_name = default_style, options = {})
-    ActiveSupport::Deprecation.warn "Remove this warning when paperclip 3.3.2 will be released"
     options[:escape] = false
     url_without_unescape(style_name, options)
   end
