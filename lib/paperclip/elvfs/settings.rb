@@ -12,7 +12,15 @@ class Paperclip::Attachment
     url_without_unescape(style_name, options)
   end
 
-  alias_method_chain :url, :unescape
+
+  if self.respond_to?(:alias_method_chain)
+    alias_method_chain :url, :unescape
+  else
+    def url_without_unescape(style_name = default_style, options = {})
+      url(style_name, options)
+    end
+  end
+
 end
 
 # our interpolators
